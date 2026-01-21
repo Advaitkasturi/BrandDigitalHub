@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./Navbar.css";
-import logo from "../logo.png"; // ✅ this is the correct path
+import logo from "../logo.png";
 
 export default function Navbar() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 900);
@@ -10,8 +10,6 @@ export default function Navbar() {
     const handleResize = () => {
       const mobile = window.innerWidth <= 900;
       setIsMobile(mobile);
-
-      // if user switches to desktop, close menu
       if (!mobile) setOpenMenu(false);
     };
 
@@ -19,23 +17,43 @@ export default function Navbar() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const navLinks = ["Home", "About Us", "Services", "Contact Us", "Our Purpose"];
+  const handleScroll = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+    setOpenMenu(false);
+  };
 
   return (
     <nav className="navbar">
       {/* LEFT: LOGO */}
-      <div className="navbar-left">
+      <div className="navbar-left" onClick={() => handleScroll("home")}>
         <img src={logo} alt="BrandDigitalHub Logo" className="navbar-logo" />
       </div>
 
       {/* RIGHT: Desktop Links */}
       {!isMobile && (
         <div className="navbar-links">
-          {navLinks.map((item) => (
-            <a key={item} href="#" className="nav-link">
-              {item}
-            </a>
-          ))}
+          <button className="nav-link" onClick={() => handleScroll("home")}>
+            Home
+          </button>
+
+          <button className="nav-link" onClick={() => handleScroll("about")}>
+            About Us
+          </button>
+
+          <button className="nav-link" onClick={() => handleScroll("services")}>
+            Services
+          </button>
+
+          <button className="nav-link" onClick={() => handleScroll("contact")}>
+            Contact Us
+          </button>
+
+          <button className="nav-link" onClick={() => handleScroll("purpose")}>
+            Our Purpose
+          </button>
         </div>
       )}
 
@@ -49,16 +67,31 @@ export default function Navbar() {
       {/* Mobile Dropdown */}
       {isMobile && openMenu && (
         <div className="mobile-dropdown">
-          {navLinks.map((item) => (
-            <a
-              key={item}
-              href="#"
-              className="mobile-link"
-              onClick={() => setOpenMenu(false)}
-            >
-              {item}
-            </a>
-          ))}
+          <button className="mobile-link" onClick={() => handleScroll("home")}>
+            Home
+          </button>
+
+          <button className="mobile-link" onClick={() => handleScroll("about")}>
+            About Us
+          </button>
+
+          <button
+            className="mobile-link"
+            onClick={() => handleScroll("services")}
+          >
+            Services
+          </button>
+
+          <button className="mobile-link" onClick={() => handleScroll("contact")}>
+            Contact Us
+          </button>
+
+          <button
+            className="mobile-link"
+            onClick={() => handleScroll("purpose")}
+          >
+            Our Purpose
+          </button>
         </div>
       )}
     </nav>

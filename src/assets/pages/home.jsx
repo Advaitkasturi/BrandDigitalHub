@@ -1,29 +1,25 @@
 import "./Home.css";
-import logo from "../logo.png"; 
+import logo from "../logo.png";
 
 export default function Home() {
   return (
-    <section className="home">
+    <section className="home" id="home">
       {/* HERO */}
       <div className="hero">
-        {/* Center Logo */}
         <div className="heroLogoWrap">
           <img className="heroLogo" src={logo} alt="BrandDigitalHub Logo" />
         </div>
 
-        {/* Main Title */}
         <h1 className="heroTitle">
           We scale brands with <span>smart digital strategies</span>, viral content{" "}
           & high-ROI ads
         </h1>
 
-        {/* Subtext */}
         <p className="heroSub">
           Unlock digital growth with innovative strategies and campaigns that connect,
           engage, and convert your audience for maximum ROI.
         </p>
 
-        {/* Buttons */}
         <div className="heroBtns">
           <button className="btnPrimary">Get a Free Consultation</button>
           <button className="btnSecondary">
@@ -31,7 +27,6 @@ export default function Home() {
           </button>
         </div>
 
-        {/* Mini points */}
         <div className="heroTicks">
           <span>✔ Smart Strategies</span>
           <span>✔ Viral Content</span>
@@ -39,7 +34,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* FEATURE CARDS */}
       <div className="featureRow">
         <div className="featureCard">
           <div className="featureIcon">💡</div>
