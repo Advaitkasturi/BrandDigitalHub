@@ -1,5 +1,6 @@
 import Navbar from "./assets/pages/navbar";
 import Home from "./assets/pages/home";
+import bg from "./assets/bg.png";
 
 export default function App() {
   return (
@@ -7,22 +8,21 @@ export default function App() {
       style={{
         minHeight: "100vh",
         width: "100%",
-        backgroundImage: "url('/bg.png')",
+        backgroundImage: `url(${bg})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* Dark overlay */}
       <div
         style={{
           minHeight: "100vh",
           width: "100%",
-          backgroundColor: "rgba(0,0,0,0.55)",
+          backgroundColor: "rgba(0,0,0,0.45)",
         }}
       >
         <Navbar />
-        <Home/>
+        <Home />
       </div>
     </div>
   );

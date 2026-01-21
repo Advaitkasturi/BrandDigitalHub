@@ -1,4 +1,5 @@
 import "./Home.css";
+import logo from "../logo.png"; 
 
 export default function Home() {
   return (
@@ -7,7 +8,7 @@ export default function Home() {
       <div className="hero">
         {/* Center Logo */}
         <div className="heroLogoWrap">
-          <img className="heroLogo" src="/logo.png" alt="BrandDigitalHub Logo" />
+          <img className="heroLogo" src={logo} alt="BrandDigitalHub Logo" />
         </div>
 
         {/* Main Title */}

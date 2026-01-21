@@ -1,45 +1,66 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Navbar.css";
+import logo from "../logo.png"; // ✅ this is the correct path
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 900);
+  const [openMenu, setOpenMenu] = useState(false);
 
-  const links = ["Home", "About Us", "Services", "Contact Us", "Our Purpose"];
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth <= 900;
+      setIsMobile(mobile);
+
+      // if user switches to desktop, close menu
+      if (!mobile) setOpenMenu(false);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const navLinks = ["Home", "About Us", "Services", "Contact Us", "Our Purpose"];
 
   return (
-    <div className="navbar">
-      {/* LOGO (always left) */}
-      <div className="navbar-logo">
-        <img src="/logo.png" alt="BrandDigitalHub Logo" />
+    <nav className="navbar">
+      {/* LEFT: LOGO */}
+      <div className="navbar-left">
+        <img src={logo} alt="BrandDigitalHub Logo" className="navbar-logo" />
       </div>
 
-      {/* Desktop Links */}
-      <div className="navbar-links">
-        {links.map((item) => (
-          <a key={item} href="#" className="nav-link">
-            {item}
-          </a>
-        ))}
-      </div>
+      {/* RIGHT: Desktop Links */}
+      {!isMobile && (
+        <div className="navbar-links">
+          {navLinks.map((item) => (
+            <a key={item} href="#" className="nav-link">
+              {item}
+            </a>
+          ))}
+        </div>
+      )}
 
-      {/* Mobile Menu Button (right side) */}
-      <button className="menu-btn" onClick={() => setOpen(!open)}>
-        ☰
-      </button>
+      {/* RIGHT: Mobile Menu Button */}
+      {isMobile && (
+        <button className="menu-btn" onClick={() => setOpenMenu(!openMenu)}>
+          ☰
+        </button>
+      )}
 
       {/* Mobile Dropdown */}
-      <div className={`mobile-menu ${open ? "active" : ""}`}>
-        {links.map((item) => (
-          <a
-            key={item}
-            href="#"
-            className="nav-link"
-            onClick={() => setOpen(false)}
-          >
-            {item}
-          </a>
-        ))}
-      </div>
-    </div>
+      {isMobile && openMenu && (
+        <div className="mobile-dropdown">
+          {navLinks.map((item) => (
+            <a
+              key={item}
+              href="#"
+              className="mobile-link"
+              onClick={() => setOpenMenu(false)}
+            >
+              {item}
+            </a>
+          ))}
+        </div>
+      )}
+    </nav>
   );
 }
