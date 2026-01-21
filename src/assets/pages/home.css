@@ -255,15 +255,18 @@
   line-height: 1.4;
 }
 
-
+/* ========================= */
+/* MOBILE VIEW */
+/* ========================= */
 @media (max-width: 700px) {
   .hero {
     text-align: left;
     padding-top: 6px;
   }
 
+  /* Logo stays CENTER */
   .heroLogoWrap {
-    justify-content: flex-center;
+    justify-content: center;
   }
 
   .heroLogo {
@@ -275,12 +278,14 @@
     margin-right: 0;
   }
 
+  /* ✅ ONLY BUTTONS CENTER ON MOBILE */
   .heroBtns {
-    justify-content: flex-start;
+    justify-content: center;
   }
 
+  /* ✅ ONLY TICKS CENTER ON MOBILE */
   .heroTicks {
-    justify-content: flex-start;
+    justify-content: center;
   }
 }
 
@@ -290,6 +295,15 @@
 @media (min-width: 700px) {
   .heroLogo {
     height: 190px;
+  }
+
+  /* ✅ reduce font size slightly on desktop */
+  .heroTitle {
+    font-size: clamp(24px, 4.8vw, 50px);
+  }
+
+  .heroSub {
+    font-size: clamp(13px, 1.6vw, 16px);
   }
 
   .btnPrimary,
